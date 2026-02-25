@@ -1,0 +1,27 @@
+{
+  "name": "twitter-keywords-tracker",
+  "version": "1.0.0",
+  "description": "A configurable polling-based monitor for X (Twitter) that scans new tweets at regular intervals to detect predefined keywords.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elhdsalim/twitter-keywords-tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elhdsalim/twitter-keywords-tracker/issues"
+  },
+  "homepage": "https://github.com/elhdsalim/twitter-keywords-tracker#readme",
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "rettiwt-api": "^6.0.8"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.0"
+  }
+}
