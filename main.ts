@@ -8,7 +8,7 @@ import { Monitor } from "./classes/Monitor";
     const WORD = process.env.WORD!;
     const WEBHOOK_URL = process.env.WEBHOOK_URL!
 
-    if (!API_KEY || WORD || WEBHOOK_URL) {
+    if (!API_KEY || !WORD || !WEBHOOK_URL) {
         throw new Error('missing api key in .env');
     }
 
