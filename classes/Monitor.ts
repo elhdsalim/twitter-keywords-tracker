@@ -1,3 +1,4 @@
+import axios from 'axios';
 import * as fs from 'fs/promises'
 import { Rettiwt, Tweet } from 'rettiwt-api';
 
@@ -6,6 +7,7 @@ export class Monitor {
     private seenTweets: Map<string, string> = new Map();// id (tweet id), fullText
     private twitterClient: Rettiwt;
     private word : string
+    private webhookURL : string;
 
     private async loadFile(configPath: string) {
         const data = await fs.readFile(configPath, { encoding: "utf-8" })
@@ -17,15 +19,17 @@ export class Monitor {
         }
     }
 
-    constructor(configPath: string, rettiwt: Rettiwt, word : string) {
+    constructor(configPath: string, rettiwt: Rettiwt, word : string, webhookUrl : string) {
         this.loadFile(configPath)
         this.twitterClient = rettiwt;
         this.word = word;
+        this.webhookURL = webhookUrl;
     }
 
     private async getNewTweets(word : string) {
         try {
-
+            
+            console.log(`[${new Date().toISOString()}] checking tweets`)
             const detectedWords = await this.twitterClient.tweet.search({
                 includeWords: [word]
             })
@@ -36,6 +40,8 @@ export class Monitor {
                 this.handleNewTweet(lastTweet)
             }
 
+            console.log(`[${new Date().toISOString()}] end check`)
+
             return;
         } catch (error) {
             console.error('error :', error);
@@ -43,14 +49,19 @@ export class Monitor {
     }
 
     private async handleNewTweet(tweet : Tweet) {
-
-        
-        
+        try {
+            await axios.post(this.webhookURL, {
+                content: `${tweet.fullText}`
+            })
+            console.log("sent msg")
+        } catch (error) {
+            console.error("error : ", error)
+        }
     }
 
     public async start() {
-        setTimeout(() => {
+        setInterval(() => {
             this.getNewTweets(this.word)
-        }, 5000);
+        }, 30000);
     }
 }

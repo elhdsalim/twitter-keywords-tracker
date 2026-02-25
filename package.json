@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/elhdsalim/twitter-keywords-tracker#readme",
   "dependencies": {
+    "axios": "^1.13.5",
     "dotenv": "^17.3.1",
     "rettiwt-api": "^6.0.8"
   },
