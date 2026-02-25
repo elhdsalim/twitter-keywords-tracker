@@ -6,8 +6,9 @@ import { Monitor } from "./classes/Monitor";
 
     const API_KEY = process.env.API_KEY;
     const WORD = process.env.WORD!;
+    const WEBHOOK_URL = process.env.WEBHOOK_URL!
 
-    if (!API_KEY) {
+    if (!API_KEY || WORD || WEBHOOK_URL) {
         throw new Error('missing api key in .env');
     }
 
@@ -16,6 +17,6 @@ import { Monitor } from "./classes/Monitor";
         logging: true
     });
 
-    const m = new Monitor("./tweets.json", rettiwt, WORD)
+    const m = new Monitor("./tweets.json", rettiwt, WORD, WEBHOOK_URL)
     m.start()
 })();
