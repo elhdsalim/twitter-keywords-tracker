@@ -9,7 +9,7 @@ import { Monitor } from "./classes/Monitor";
     const WEBHOOK_URL = process.env.WEBHOOK_URL!
 
     if (!API_KEY || !WORD || !WEBHOOK_URL) {
-        throw new Error('missing api key in .env');
+        throw new Error('bad .env');
     }
 
     const rettiwt = new Rettiwt({
